@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GNA Toolkit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/taskpane.css?v=1.0.0">
+  <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <script src="src/rules.js?v=1.0.0"></script>
+  <script src="src/catalog.js?v=1.0.0"></script>
+  <script src="src/gna-core.js?v=1.0.0"></script>
+</head>
+<body>
+  <header class="top">
+    <img src="assets/icons/logo-32.png" alt="" width="24" height="24">
+    <h1>GNA Toolkit</h1>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="library">Library</button>
+    <button role="tab" data-tab="starters">Starters</button>
+    <button role="tab" data-tab="tools">Tools</button>
+    <button role="tab" data-tab="check">Check</button>
+    <button role="tab" data-tab="guide">Guide</button>
+  </nav>
+
+  <main>
+    <!-- LIBRARY -->
+    <section id="tab-library" class="tab" hidden>
+      <div class="search-row">
+        <input id="lib-search" type="search" placeholder="Search, e.g. waterfall or 58" autocomplete="off">
+        <select id="lib-cat" aria-label="Category"></select>
+      </div>
+      <div id="lib-recent" class="recent" hidden>
+        <h3>Recently used</h3>
+        <div class="recent-row" id="lib-recent-row"></div>
+      </div>
+      <p class="hint">Click a slide to insert it after the current slide.</p>
+      <div id="lib-groups"></div>
+      <details class="settings">
+        <summary>Insert settings</summary>
+        <label for="fmt">Formatting</label>
+        <select id="fmt">
+          <option value="auto">Auto (recommended)</option>
+          <option value="destination">Use this deck's theme</option>
+          <option value="keep">Keep template formatting</option>
+        </select>
+        <p class="small">Auto uses this deck's theme when it already has the GNA master, so no duplicate masters pile up. Otherwise it keeps the template formatting.</p>
+      </details>
+    </section>
+
+    <!-- STARTERS -->
+    <section id="tab-starters" class="tab" hidden>
+      <p class="hint">Default slide lineups from the GNA deck rules. Open one as a new deck, or add it to the deck you have open.</p>
+      <div id="starter-list"></div>
+    </section>
+
+    <!-- TOOLS -->
+    <section id="tab-tools" class="tab" hidden>
+      <p class="hint">Tools apply to the selected slides. Select several in the thumbnail pane to apply them all at once.</p>
+
+      <div class="tool">
+        <h3>Sticker</h3>
+        <div class="btn-row" id="sticker-row"></div>
+        <button class="link" id="sticker-remove">Remove sticker</button>
+      </div>
+
+      <div class="tool">
+        <h3>Source line</h3>
+        <div class="radio-col">
+          <label><input type="radio" name="src" value="client" checked> <span><input id="src-client" type="text" placeholder="Client name" aria-label="Client name"> data</span></label>
+          <label><input type="radio" name="src" value="gna"> GNA analysis</label>
+          <label><input type="radio" name="src" value="custom"> <input id="src-custom" type="text" placeholder="Named source, e.g. US Census 2025" aria-label="Custom source"></label>
+        </div>
+        <button class="primary" id="src-apply">Apply source line</button>
+      </div>
+
+      <div class="tool">
+        <h3>Section tag</h3>
+        <div class="inline">
+          <input id="sec-text" type="text" placeholder="Agenda section name">
+          <button class="primary" id="sec-apply">Apply</button>
+        </div>
+      </div>
+
+      <div class="tool">
+        <h3>[NEEDED] flag</h3>
+        <div class="inline">
+          <input id="needed-text" type="text" placeholder="What is missing, e.g. client revenue, FY2025">
+          <button class="primary" id="needed-insert">Insert</button>
+        </div>
+        <button class="link" id="needed-wrap">Wrap selected text as [NEEDED: ...]</button>
+        <p class="small">Add-ins can't apply text highlighting yet. After wrapping, use Home &gt; Text Highlight Color &gt; Yellow.</p>
+      </div>
+
+      <div class="tool">
+        <h3>Status dots</h3>
+        <div class="btn-row">
+          <button class="dot-btn" data-dot="green"><span class="dot" style="background:#00B050"></span>On track</button>
+          <button class="dot-btn" data-dot="amber"><span class="dot" style="background:#FFC000"></span>At risk</button>
+          <button class="dot-btn" data-dot="red"><span class="dot" style="background:#E5546C"></span>Off track</button>
+          <button class="dot-btn" data-dot="grey"><span class="dot" style="background:#8C8C8C"></span>Not started</button>
+        </div>
+        <p class="small">Placed next to the selected shape. Red and green are for status and risk only.</p>
+      </div>
+
+      <div class="tool">
+        <h3>Harvey balls</h3>
+        <div class="btn-row" id="harvey-row"></div>
+        <p class="small">Inserted mid-slide as a picture; drag it into place.</p>
+      </div>
+    </section>
+
+    <!-- CHECK -->
+    <section id="tab-check" class="tab" hidden>
+      <p class="hint">Checks the whole deck against GNA house style before it goes to a client.</p>
+      <div class="inline">
+        <button class="primary" id="check-run">Run check</button>
+        <button id="check-fix" hidden>Fix safe issues</button>
+      </div>
+      <div id="check-progress" class="small" hidden></div>
+      <div id="check-summary" class="summary" hidden></div>
+      <div id="check-filters" class="filters" hidden>
+        <label><input type="checkbox" data-sev="error" checked> Errors</label>
+        <label><input type="checkbox" data-sev="warning" checked> Warnings</label>
+        <label><input type="checkbox" data-sev="info" checked> Info</label>
+      </div>
+      <div id="check-results"></div>
+      <div id="check-needed" hidden>
+        <h3>Open [NEEDED] flags</h3>
+        <ol id="needed-list"></ol>
+        <button id="needed-copy">Copy list</button>
+      </div>
+      <p class="small">Can't be checked automatically: one message per slide, action titles that tell the story, one teal highlight per slide. Read the titles in order before sending.</p>
+    </section>
+
+    <!-- GUIDE -->
+    <section id="tab-guide" class="tab" hidden>
+      <h3>House rules</h3>
+      <ol class="rules">
+        <li><b>Action titles.</b> State the takeaway as a full sentence. Reading only the titles tells the story.</li>
+        <li><b>One message per slide.</b> If a slide needs two titles, it is two slides.</li>
+        <li><b>Sentence case.</b> Capitalize the first word and proper nouns only.</li>
+        <li><b>No em dashes.</b> Use a comma, colon or full stop.</li>
+        <li><b>Lora only.</b> Don't override the theme font.</li>
+        <li><b>One teal highlight per slide.</b> Teal leads, grey supports.</li>
+        <li><b>Always cite.</b> Source line bottom left: "Source: [Client] data" or "Source: GNA analysis".</li>
+        <li><b>White content slides.</b> Solid teal only on covers, statements and closing.</li>
+        <li><b>No big-number layouts.</b> Show numbers inline in compact rows.</li>
+      </ol>
+      <h3>Style guide slides</h3>
+      <img class="guide-img" src="assets/guide/g01.jpg" alt="Style guide: writing rules and slide anatomy">
+      <img class="guide-img" src="assets/guide/g02.jpg" alt="Style guide: the GNA palette">
+      <img class="guide-img" src="assets/guide/g03.jpg" alt="Style guide: typography and signature elements">
+      <p class="small" id="version"></p>
+    </section>
+  </main>
+
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="src/taskpane.js?v=1.0.0"></script>
+</body>
+</html>

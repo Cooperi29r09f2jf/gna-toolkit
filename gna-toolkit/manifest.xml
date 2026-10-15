@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  GNA Toolkit, PowerPoint add-in manifest.
+  To move hosting, run: python3 tools/set_url.py https://NEW-BASE-URL/
+  After changing anything in this file, raise <Version> and re-upload it in the
+  Microsoft 365 admin center (Settings > Integrated apps).
+-->
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides"
+           xsi:type="TaskPaneApp">
+  <Id>3e390f06-2734-4bb8-a9e6-8c1381fe4204</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Gheen &amp; Noyes Advisory</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="GNA Toolkit"/>
+  <Description DefaultValue="Build GNA client decks faster: template slide library, deck starters, quick tools and a house-style checker."/>
+  <IconUrl DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/logo-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/logo-64.png"/>
+  <SupportUrl DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/index.html"/>
+  <AppDomains>
+    <AppDomain>https://cooperi29r09f2jf.github.io</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Presentation"/>
+  </Hosts>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/taskpane.html"/>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Presentation">
+        <DesktopFormFactor>
+          <FunctionFile resid="Url.Commands"/>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="GNA.Tab">
+              <Group id="GNA.Group.Build">
+                <Label resid="Group.Build.Label"/>
+                <Icon><bt:Image size="16" resid="Icon.library.16"/><bt:Image size="32" resid="Icon.library.32"/><bt:Image size="80" resid="Icon.library.80"/></Icon>
+                  <Control xsi:type="Button" id="Btn.Library">
+                    <Label resid="Btn.Library.Label"/>
+                    <Supertip><Title resid="Btn.Library.Label"/><Description resid="Btn.Library.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.library.16"/><bt:Image size="32" resid="Icon.library.32"/><bt:Image size="80" resid="Icon.library.80"/></Icon>
+                    <Action xsi:type="ShowTaskpane"><TaskpaneId>GNAPane</TaskpaneId><SourceLocation resid="Url.Pane.library"/><Title resid="Pane.Title"/></Action>
+                  </Control>
+                  <Control xsi:type="Button" id="Btn.Starters">
+                    <Label resid="Btn.Starters.Label"/>
+                    <Supertip><Title resid="Btn.Starters.Label"/><Description resid="Btn.Starters.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.starters.16"/><bt:Image size="32" resid="Icon.starters.32"/><bt:Image size="80" resid="Icon.starters.80"/></Icon>
+                    <Action xsi:type="ShowTaskpane"><TaskpaneId>GNAPane</TaskpaneId><SourceLocation resid="Url.Pane.starters"/><Title resid="Pane.Title"/></Action>
+                  </Control>
+              </Group>
+              <Group id="GNA.Group.Quick">
+                <Label resid="Group.Quick.Label"/>
+                <Icon><bt:Image size="16" resid="Icon.tools.16"/><bt:Image size="32" resid="Icon.tools.32"/><bt:Image size="80" resid="Icon.tools.80"/></Icon>
+                  <Control xsi:type="Menu" id="Menu.Sticker">
+                    <Label resid="Menu.Sticker.Label"/>
+                    <Supertip><Title resid="Menu.Sticker.Label"/><Description resid="Menu.Sticker.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.sticker.16"/><bt:Image size="32" resid="Icon.sticker.32"/><bt:Image size="80" resid="Icon.sticker.80"/></Icon>
+                    <Items>
+                      <Item id="Item.Discussion"><Label resid="Item.Discussion.Label"/><Supertip><Title resid="Item.Discussion.Label"/><Description resid="Item.Discussion.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.sticker.16"/><bt:Image size="32" resid="Icon.sticker.32"/><bt:Image size="80" resid="Icon.sticker.80"/></Icon>
+                        <Action xsi:type="ExecuteFunction"><FunctionName>stickerDiscussion</FunctionName></Action>
+                      </Item>
+                      <Item id="Item.Preliminary"><Label resid="Item.Preliminary.Label"/><Supertip><Title resid="Item.Preliminary.Label"/><Description resid="Item.Preliminary.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.sticker.16"/><bt:Image size="32" resid="Icon.sticker.32"/><bt:Image size="80" resid="Icon.sticker.80"/></Icon>
+                        <Action xsi:type="ExecuteFunction"><FunctionName>stickerPreliminary</FunctionName></Action>
+                      </Item>
+                      <Item id="Item.Draft"><Label resid="Item.Draft.Label"/><Supertip><Title resid="Item.Draft.Label"/><Description resid="Item.Draft.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.sticker.16"/><bt:Image size="32" resid="Icon.sticker.32"/><bt:Image size="80" resid="Icon.sticker.80"/></Icon>
+                        <Action xsi:type="ExecuteFunction"><FunctionName>stickerDraft</FunctionName></Action>
+                      </Item>
+                      <Item id="Item.StickerRemove"><Label resid="Item.StickerRemove.Label"/><Supertip><Title resid="Item.StickerRemove.Label"/><Description resid="Item.StickerRemove.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.sticker.16"/><bt:Image size="32" resid="Icon.sticker.32"/><bt:Image size="80" resid="Icon.sticker.80"/></Icon>
+                        <Action xsi:type="ExecuteFunction"><FunctionName>stickerRemove</FunctionName></Action>
+                      </Item>
+                    </Items>
+                  </Control>
+                  <Control xsi:type="Menu" id="Menu.Source">
+                    <Label resid="Menu.Source.Label"/>
+                    <Supertip><Title resid="Menu.Source.Label"/><Description resid="Menu.Source.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.source.16"/><bt:Image size="32" resid="Icon.source.32"/><bt:Image size="80" resid="Icon.source.80"/></Icon>
+                    <Items>
+                      <Item id="Item.SourceGna"><Label resid="Item.SourceGna.Label"/><Supertip><Title resid="Item.SourceGna.Label"/><Description resid="Item.SourceGna.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.source.16"/><bt:Image size="32" resid="Icon.source.32"/><bt:Image size="80" resid="Icon.source.80"/></Icon>
+                        <Action xsi:type="ExecuteFunction"><FunctionName>sourceGna</FunctionName></Action>
+                      </Item>
+                      <Item id="Item.SourceNeeded"><Label resid="Item.SourceNeeded.Label"/><Supertip><Title resid="Item.SourceNeeded.Label"/><Description resid="Item.SourceNeeded.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.source.16"/><bt:Image size="32" resid="Icon.source.32"/><bt:Image size="80" resid="Icon.source.80"/></Icon>
+                        <Action xsi:type="ExecuteFunction"><FunctionName>sourceNeeded</FunctionName></Action>
+                      </Item>
+                      <Item id="Item.SourceMore"><Label resid="Item.SourceMore.Label"/><Supertip><Title resid="Item.SourceMore.Label"/><Description resid="Item.SourceMore.Tip"/></Supertip>
+                        <Icon><bt:Image size="16" resid="Icon.tools.16"/><bt:Image size="32" resid="Icon.tools.32"/><bt:Image size="80" resid="Icon.tools.80"/></Icon>
+                        <Action xsi:type="ShowTaskpane"><TaskpaneId>GNAPane</TaskpaneId><SourceLocation resid="Url.Pane.tools"/><Title resid="Pane.Title"/></Action>
+                      </Item>
+                    </Items>
+                  </Control>
+                  <Control xsi:type="Button" id="Btn.Needed">
+                    <Label resid="Btn.Needed.Label"/>
+                    <Supertip><Title resid="Btn.Needed.Label"/><Description resid="Btn.Needed.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.needed.16"/><bt:Image size="32" resid="Icon.needed.32"/><bt:Image size="80" resid="Icon.needed.80"/></Icon>
+                    <Action xsi:type="ExecuteFunction"><FunctionName>insertNeeded</FunctionName></Action>
+                  </Control>
+                  <Control xsi:type="Button" id="Btn.Tools">
+                    <Label resid="Btn.Tools.Label"/>
+                    <Supertip><Title resid="Btn.Tools.Label"/><Description resid="Btn.Tools.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.tools.16"/><bt:Image size="32" resid="Icon.tools.32"/><bt:Image size="80" resid="Icon.tools.80"/></Icon>
+                    <Action xsi:type="ShowTaskpane"><TaskpaneId>GNAPane</TaskpaneId><SourceLocation resid="Url.Pane.tools"/><Title resid="Pane.Title"/></Action>
+                  </Control>
+              </Group>
+              <Group id="GNA.Group.Check">
+                <Label resid="Group.Check.Label"/>
+                <Icon><bt:Image size="16" resid="Icon.check.16"/><bt:Image size="32" resid="Icon.check.32"/><bt:Image size="80" resid="Icon.check.80"/></Icon>
+                  <Control xsi:type="Button" id="Btn.Check">
+                    <Label resid="Btn.Check.Label"/>
+                    <Supertip><Title resid="Btn.Check.Label"/><Description resid="Btn.Check.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.check.16"/><bt:Image size="32" resid="Icon.check.32"/><bt:Image size="80" resid="Icon.check.80"/></Icon>
+                    <Action xsi:type="ShowTaskpane"><TaskpaneId>GNAPane</TaskpaneId><SourceLocation resid="Url.Pane.check"/><Title resid="Pane.Title"/></Action>
+                  </Control>
+                  <Control xsi:type="Button" id="Btn.Guide">
+                    <Label resid="Btn.Guide.Label"/>
+                    <Supertip><Title resid="Btn.Guide.Label"/><Description resid="Btn.Guide.Tip"/></Supertip>
+                    <Icon><bt:Image size="16" resid="Icon.logo.16"/><bt:Image size="32" resid="Icon.logo.32"/><bt:Image size="80" resid="Icon.logo.80"/></Icon>
+                    <Action xsi:type="ShowTaskpane"><TaskpaneId>GNAPane</TaskpaneId><SourceLocation resid="Url.Pane.guide"/><Title resid="Pane.Title"/></Action>
+                  </Control>
+              </Group>
+              <Label resid="Tab.Label"/>
+              <InsertAfter>TabHome</InsertAfter>
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.library.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/library-16.png"/>
+        <bt:Image id="Icon.library.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/library-32.png"/>
+        <bt:Image id="Icon.library.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/library-80.png"/>
+        <bt:Image id="Icon.starters.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/starters-16.png"/>
+        <bt:Image id="Icon.starters.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/starters-32.png"/>
+        <bt:Image id="Icon.starters.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/starters-80.png"/>
+        <bt:Image id="Icon.sticker.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/sticker-16.png"/>
+        <bt:Image id="Icon.sticker.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/sticker-32.png"/>
+        <bt:Image id="Icon.sticker.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/sticker-80.png"/>
+        <bt:Image id="Icon.source.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/source-16.png"/>
+        <bt:Image id="Icon.source.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/source-32.png"/>
+        <bt:Image id="Icon.source.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/source-80.png"/>
+        <bt:Image id="Icon.needed.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/needed-16.png"/>
+        <bt:Image id="Icon.needed.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/needed-32.png"/>
+        <bt:Image id="Icon.needed.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/needed-80.png"/>
+        <bt:Image id="Icon.tools.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/tools-16.png"/>
+        <bt:Image id="Icon.tools.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/tools-32.png"/>
+        <bt:Image id="Icon.tools.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/tools-80.png"/>
+        <bt:Image id="Icon.check.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/check-16.png"/>
+        <bt:Image id="Icon.check.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/check-32.png"/>
+        <bt:Image id="Icon.check.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/check-80.png"/>
+        <bt:Image id="Icon.logo.16" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/logo-16.png"/>
+        <bt:Image id="Icon.logo.32" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/logo-32.png"/>
+        <bt:Image id="Icon.logo.80" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/assets/icons/logo-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Url.Pane.library" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/taskpane.html?tab=library"/>
+        <bt:Url id="Url.Pane.starters" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/taskpane.html?tab=starters"/>
+        <bt:Url id="Url.Pane.tools" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/taskpane.html?tab=tools"/>
+        <bt:Url id="Url.Pane.check" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/taskpane.html?tab=check"/>
+        <bt:Url id="Url.Pane.guide" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/taskpane.html?tab=guide"/>
+        <bt:Url id="Url.Commands" DefaultValue="https://cooperi29r09f2jf.github.io/gna-toolkit/commands.html"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="Btn.Library.Label" DefaultValue="Slide library"/>
+        <bt:String id="Btn.Starters.Label" DefaultValue="Deck starters"/>
+        <bt:String id="Menu.Sticker.Label" DefaultValue="Sticker"/>
+        <bt:String id="Item.Discussion.Label" DefaultValue="For discussion"/>
+        <bt:String id="Item.Preliminary.Label" DefaultValue="Preliminary"/>
+        <bt:String id="Item.Draft.Label" DefaultValue="Draft"/>
+        <bt:String id="Item.StickerRemove.Label" DefaultValue="Remove sticker"/>
+        <bt:String id="Menu.Source.Label" DefaultValue="Source line"/>
+        <bt:String id="Item.SourceGna.Label" DefaultValue="Source: GNA analysis"/>
+        <bt:String id="Item.SourceNeeded.Label" DefaultValue="Source: [NEEDED]"/>
+        <bt:String id="Item.SourceMore.Label" DefaultValue="Client or named source..."/>
+        <bt:String id="Btn.Needed.Label" DefaultValue="[NEEDED] flag"/>
+        <bt:String id="Btn.Tools.Label" DefaultValue="More tools"/>
+        <bt:String id="Btn.Check.Label" DefaultValue="Style checker"/>
+        <bt:String id="Btn.Guide.Label" DefaultValue="Style guide"/>
+        <bt:String id="Tab.Label" DefaultValue="GNA Toolkit"/>
+        <bt:String id="Group.Build.Label" DefaultValue="Build"/>
+        <bt:String id="Group.Quick.Label" DefaultValue="Quick tools"/>
+        <bt:String id="Group.Check.Label" DefaultValue="Check"/>
+        <bt:String id="Pane.Title" DefaultValue="GNA Toolkit"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="Btn.Library.Tip" DefaultValue="Browse all GNA template slides by category and insert one after the current slide."/>
+        <bt:String id="Btn.Starters.Tip" DefaultValue="Start a Proposal, Findings, SteerCo or Workshop deck with the default slide lineup."/>
+        <bt:String id="Menu.Sticker.Tip" DefaultValue="Add a sticker (top right, under the title) to the selected slides."/>
+        <bt:String id="Item.Discussion.Tip" DefaultValue="Mark the selected slides as for discussion."/>
+        <bt:String id="Item.Preliminary.Tip" DefaultValue="Mark the selected slides as preliminary."/>
+        <bt:String id="Item.Draft.Tip" DefaultValue="Mark the selected slides as draft."/>
+        <bt:String id="Item.StickerRemove.Tip" DefaultValue="Remove the sticker from the selected slides."/>
+        <bt:String id="Menu.Source.Tip" DefaultValue="Add or update the source line (bottom left) on the selected slides."/>
+        <bt:String id="Item.SourceGna.Tip" DefaultValue="Set the source line to GNA analysis on the selected slides."/>
+        <bt:String id="Item.SourceNeeded.Tip" DefaultValue="Add a source line flagged [NEEDED: source] to the selected slides."/>
+        <bt:String id="Item.SourceMore.Tip" DefaultValue="Open the Tools pane to set a client or named source."/>
+        <bt:String id="Btn.Needed.Tip" DefaultValue="Insert a yellow [NEEDED: ...] flag on the current slide."/>
+        <bt:String id="Btn.Tools.Tip" DefaultValue="Section tags, status dots, Harvey balls and more."/>
+        <bt:String id="Btn.Check.Tip" DefaultValue="Check the deck against GNA house style and fix the safe issues in one click."/>
+        <bt:String id="Btn.Guide.Tip" DefaultValue="GNA house rules and the template style guide."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
